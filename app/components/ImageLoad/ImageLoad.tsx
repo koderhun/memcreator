@@ -1,5 +1,6 @@
 'use client'
 import React, {useState, ChangeEvent} from 'react'
+import {Label, FileInput, Button} from 'flowbite-react'
 import s from './styles.module.scss'
 import cn from 'classnames'
 
@@ -40,20 +41,27 @@ export const ImageLoad: React.FC<ImageLoadProps> = ({handleLoadImage}) => {
   }
 
   return (
-    <form className={cn(s.imageLoad, file === '' ? 'noload' : 'load')}>
-      <div className={s.content}>
+    <form className={cn(s.imageLoad, file === '' ? s.noload : s.load)}>
+      <div className={cn(s.content, 'mb-4')}>
         <div className={s.image}>
-          <span>Upload Image</span>
           <img src={file as string} alt="Uploaded" />
         </div>
-        <div className={s.inputGroup}>
-          <div className={s.label}>
-            <label htmlFor="file" className={s.add}>
-              +
-            </label>
-            <input type="file" id="file" onChange={handleFileLoad} />
+      </div>
+      <div className={cn(s.inputGroup)}>
+        <div>
+          <div className="mb-2">
+            <Label htmlFor="file" value="Загрузить файл:" />
           </div>
-          <button onClick={handleDelete} className={s.delete}></button>
+
+          <FileInput onChange={handleFileLoad} id="file" />
+        </div>
+        <div>
+          <div className="mb-2">
+            <Label value="&nbsp;" />
+          </div>
+          <Button color="red" onClick={handleDelete} className={s.delete}>
+            Удалить
+          </Button>
         </div>
       </div>
     </form>

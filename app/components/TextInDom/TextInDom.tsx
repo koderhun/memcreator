@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
+import cn from 'classnames'
 import Draggable, {DraggableEventHandler, DraggableEvent} from 'react-draggable'
+import s from './styles.module.scss'
 
 interface TextInDomProps {
   settings: {
@@ -59,9 +61,9 @@ export const TextInDom: React.FC<TextInDomProps> = ({
       <div
         id={`text${index}`}
         onClick={() => handleSelectText(index)}
-        className={`SingaCreator__textContent SingaCreator__textContent--v${index} ${activeClass}`}>
-        <div className="SingaCreator__row" style={style}>
-          <div className="SingaCreator__text">{settings.name}</div>
+        className={cn(s.TextInDom, s['TextInDom' + index], activeClass)}>
+        <div style={style}>
+          <div>{settings.name}</div>
         </div>
       </div>
     </Draggable>

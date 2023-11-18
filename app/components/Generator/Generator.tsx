@@ -2,7 +2,7 @@
 import React, {useState, ChangeEvent} from 'react'
 import {DraggableEvent} from 'react-draggable'
 import cn from 'classnames'
-import {Button, Textarea, Label, RangeSlider} from 'flowbite-react'
+import {Button, Textarea, Label, RangeSlider, Select} from 'flowbite-react'
 import {elementToImage} from '@/utils/elementToImage'
 import {DEFAULT_TEXT, DEFAULT_TEXT_DATA} from '@/constants'
 import {MemContent} from '@/components'
@@ -128,7 +128,12 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
   let {rotate, fontSize, name, color, strokeColor} = textList[selectKey]
 
   return (
-    <div className={cn(s.Generator, 'grid grid-cols-1 lg:grid-cols-2 gap-4')}>
+    <div
+      className={cn(
+        s.Generator,
+        {[s.noload]: !loadedImage},
+        'grid grid-cols-1 lg:grid-cols-2 gap-4',
+      )}>
       <div className={s.content}>
         <MemContent
           filepath={filepath}
@@ -142,7 +147,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
         />
       </div>
       <div className={s.form}>
-        <h1 className="mb-2 text-3xl font-extrabold text-gray-900 dark:text-white ">
+        <h1 className="mb-2 text-4xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
           Создайте свой мем
         </h1>
         <div className="mb-4">
@@ -150,8 +155,8 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             Добавить строку
           </Button>
         </div>
-        <div className="max-w-md mb-4">
-          <div className="mb-2 block">
+        <div className=" mb-4">
+          <div className="mb-1 block">
             <Label htmlFor={name} value="Текст: " />
           </div>
           <Textarea
@@ -162,7 +167,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             rows={2}
           />
         </div>
-        <div className="max-w-md mb-4">
+        <div className=" mb-4">
           <div className="mb-1 block">
             <Label htmlFor="rotate" value="Поворот текста:" /> {rotate}
           </div>
@@ -175,7 +180,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
           />
         </div>
 
-        <div className="max-w-md mb-4">
+        <div className=" mb-4">
           <div className="mb-1 block">
             <Label htmlFor="fontsize" value="Размер шрифта:" /> {fontSize}
           </div>
@@ -188,7 +193,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={fontSize}
           />
         </div>
-        <div className="max-w-md mb-4">
+        <div className=" mb-4">
           <div className="mb-1 block">
             <Label htmlFor="colorText" value="Цвет текста:"></Label>
           </div>
@@ -200,7 +205,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={color}
           />
         </div>
-        <div className="max-w-md mb-4">
+        <div className=" mb-4">
           <div className="mb-1 block">
             <Label htmlFor="colorShadow" value="Цвет обводки:"></Label>
           </div>
@@ -212,24 +217,25 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={strokeColor}
           />
         </div>
-
-        <div className="form-line form-line-between">
-          <label className="form-line">
-            <span>Тип файла: </span>
-            <select
-              value={typeImage}
-              onChange={selectFormat}
-              className="form-control">
-              <option value="jpg">jpg</option>
-              <option value="png">png</option>
-            </select>
-          </label>
+        <div className=" mb-4">
+          <div className="mb-1 block">
+            <Label htmlFor="typeFile" value="Тип файла:"></Label>
+          </div>
+          <Select
+            id="typeFile"
+            name="typeFile"
+            value={typeImage}
+            onChange={selectFormat}>
+            <option value="jpg">jpg</option>
+            <option value="png">png</option>
+          </Select>
         </div>
-        <hr />
-        <div className="form-line  form-line-between">
-          <span />
+        <div className="flex">
           <Button onClick={() => handleGenerate()}>Скачать</Button>
-          <Button color="light" onClick={() => handleGenerate('tg')}>
+          <Button
+            className="ml-2"
+            color="light"
+            onClick={() => handleGenerate('tg')}>
             Поделиться
           </Button>
         </div>
