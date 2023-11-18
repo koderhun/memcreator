@@ -1,3 +1,4 @@
+'use client'
 import React, {useState, ChangeEvent} from 'react'
 import s from './styles.module.scss'
 import cn from 'classnames'

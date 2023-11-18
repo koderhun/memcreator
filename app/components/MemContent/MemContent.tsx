@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {TextInDom, ImageShow, ImageLoad} from '@/components'
 import {DraggableEvent} from 'react-draggable'
