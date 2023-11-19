@@ -1,10 +1,13 @@
 'use client'
-import React from 'react'
-import {TextInDom, ImageShow, ImageLoad} from '@/components'
+import React, {useState, ChangeEvent} from 'react'
+import {Label, FileInput, Button} from 'flowbite-react'
 import {DraggableEvent} from 'react-draggable'
+import {TextInDom} from '@/components'
+import s from './styles.module.scss'
+import cn from 'classnames'
 
 interface MemContentProps {
-  filepath: string
+  handleLoadImage: () => void
   textList: {
     fontSize: number
     color: string
@@ -23,25 +26,52 @@ interface MemContentProps {
     index: number,
   ) => void
   handleSelectText: (index: number) => void
-  handleLoadImage: () => void
 }
 
 export const MemContent: React.FC<MemContentProps> = ({
-  filepath,
   textList,
   selectKey,
   handleDragStop,
   handleSelectText,
   handleLoadImage,
 }) => {
+  const [file, setFile] = useState<string | ArrayBuffer | null>('')
+
+  const loadFile = (file: File) => {
+    if (
+      file &&
+      file.type !== 'image/png' &&
+      file.type !== 'image/jpeg' &&
+      file.type !== 'image/svg+xml'
+    ) {
+      alert('Incorrect file format!')
+      return
+    }
+
+    let reader = new FileReader()
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      setFile(e.target?.result as string)
+      handleLoadImage()
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const handleFileLoad = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) return loadFile(file)
+    console.log('Failed to load the file!')
+  }
+
+  const handleDelete = () => {
+    setFile('')
+  }
+
   return (
-    <div className={'SingaCreator SingaCreator--ogo'}>
-      <div className="SingaCreator__content" id="content">
-        {filepath ? (
-          <ImageShow filepath={filepath} />
-        ) : (
-          <ImageLoad handleLoadImage={handleLoadImage} />
-        )}
+    <div className={cn(s.MemContent, file === '' ? s.noload : s.load)}>
+      <div id="content" className={cn(s.content, 'mb-4')}>
+        <div className={s.image}>
+          <img src={file as string} alt="Uploaded" />
+        </div>
         {textList.map((settings, key) => (
           <TextInDom
             key={key}
@@ -52,6 +82,23 @@ export const MemContent: React.FC<MemContentProps> = ({
             selectKey={selectKey}
           />
         ))}
+      </div>
+      <div className={cn(s.inputGroup, 'flex', 'justify-between')}>
+        <div>
+          <div className="mb-2">
+            <Label htmlFor="file" value="Загрузить файл:" />
+          </div>
+
+          <FileInput onChange={handleFileLoad} id="file" />
+        </div>
+        <div>
+          <div className="mb-2">
+            <Label value="&nbsp;" />
+          </div>
+          <Button color="red" onClick={handleDelete} className={s.delete}>
+            Удалить
+          </Button>
+        </div>
       </div>
     </div>
   )

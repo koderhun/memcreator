@@ -41,7 +41,7 @@ export const ImageLoad: React.FC<ImageLoadProps> = ({handleLoadImage}) => {
   }
 
   return (
-    <form className={cn(s.imageLoad, file === '' ? s.noload : s.load)}>
+    <div className={cn(s.imageLoad, file === '' ? s.noload : s.load)}>
       <div className={cn(s.content, 'mb-4')}>
         <div className={s.image}>
           <img src={file as string} alt="Uploaded" />
@@ -64,6 +64,6 @@ export const ImageLoad: React.FC<ImageLoadProps> = ({handleLoadImage}) => {
           </Button>
         </div>
       </div>
-    </form>
+    </div>
   )
 }

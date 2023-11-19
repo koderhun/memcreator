@@ -38,7 +38,6 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
 
   const [selectKey, setSelectKey] = useState<number>(0)
   const [textList, setTextList] = useState<TextData[]>([textData])
-  const [typeImage, setTypeImage] = useState<string>('jpg')
   const [loadedImage, setLoadedImage] = useState<boolean>(false)
   const [download, setDownload] = useState<boolean>(false)
 
@@ -47,10 +46,6 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
     thisTextList[selectKey].name = e.target.value
 
     setTextList(thisTextList)
-  }
-
-  const selectFormat = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTypeImage(e.target.value)
   }
 
   const handleDragStop = (
@@ -98,11 +93,12 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
 
   const handleGenerate = (hrefType: string = '') => {
     const node = document.getElementById('content')
+    console.log('node , ', node)
     setDownload(true)
     if (hrefType === 'tg') {
-      elementToImage(node, typeImage, 'tg')
+      elementToImage(node, 'tg')
     } else {
-      elementToImage(node, typeImage)
+      elementToImage(node)
     }
     setTimeout(() => {
       setDownload(false)
@@ -132,15 +128,13 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
       className={cn(
         s.Generator,
         {[s.noload]: !loadedImage},
+        {[s.download]: download},
         'grid grid-cols-1 lg:grid-cols-2 gap-4',
       )}>
       <div className={s.content}>
         <MemContent
-          filepath={filepath}
           textList={textList}
-          type={typeImage}
           selectKey={selectKey}
-          handleText={handleText}
           handleSelectText={handleSelectText}
           handleLoadImage={handleLoadImage}
           handleDragStop={handleDragStop}
@@ -216,19 +210,6 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             onChange={handleStrokeColor}
             value={strokeColor}
           />
-        </div>
-        <div className=" mb-4">
-          <div className="mb-1 block">
-            <Label htmlFor="typeFile" value="Тип файла:"></Label>
-          </div>
-          <Select
-            id="typeFile"
-            name="typeFile"
-            value={typeImage}
-            onChange={selectFormat}>
-            <option value="jpg">jpg</option>
-            <option value="png">png</option>
-          </Select>
         </div>
         <div className="flex">
           <Button onClick={() => handleGenerate()}>Скачать</Button>
