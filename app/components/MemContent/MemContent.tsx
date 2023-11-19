@@ -7,7 +7,7 @@ import s from './styles.module.scss'
 import cn from 'classnames'
 
 interface MemContentProps {
-  handleLoadImage: () => void
+  handleLoadImage: (status: boolean) => void
   textList: {
     fontSize: number
     color: string
@@ -51,7 +51,7 @@ export const MemContent: React.FC<MemContentProps> = ({
     let reader = new FileReader()
     reader.onload = (e: ProgressEvent<FileReader>) => {
       setFile(e.target?.result as string)
-      handleLoadImage()
+      handleLoadImage(true)
     }
     reader.readAsDataURL(file)
   }
@@ -64,10 +64,11 @@ export const MemContent: React.FC<MemContentProps> = ({
 
   const handleDelete = () => {
     setFile('')
+    handleLoadImage(false)
   }
 
   return (
-    <div className={cn(s.MemContent, file === '' ? s.noload : s.load)}>
+    <div className={s.MemContent}>
       <div id="content" className={cn(s.content, 'mb-4')}>
         <div className={s.image}>
           <img src={file as string} alt="Uploaded" />
@@ -89,7 +90,12 @@ export const MemContent: React.FC<MemContentProps> = ({
             <Label htmlFor="file" value="Загрузить файл:" />
           </div>
 
-          <FileInput onChange={handleFileLoad} id="file" />
+          <FileInput onChange={handleFileLoad} id="file" key={file ?? ''} />
+          <p
+            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+            id="file_input_help">
+            PNG, JPG (MAX. 800x400px)
+          </p>
         </div>
         <div>
           <div className="mb-2">

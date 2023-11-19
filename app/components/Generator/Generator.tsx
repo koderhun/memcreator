@@ -105,7 +105,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
     }, 1000)
   }
 
-  const handleLoadImage = () => setLoadedImage(true)
+  const handleLoadImage = (status: boolean) => setLoadedImage(status)
 
   const handleAppendText = () => {
     let thisDefaultTextData: TextData = {...DEFAULT_TEXT_DATA}
@@ -187,11 +187,13 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={fontSize}
           />
         </div>
-        <div className=" mb-4">
-          <div className="mb-1 block">
-            <Label htmlFor="colorText" value="Цвет текста:"></Label>
-          </div>
+        <div className="flex items-center mb-4">
+          <Label
+            className="mr-2"
+            htmlFor="colorText"
+            value="Цвет текста:"></Label>
           <input
+            className={s.inputColor}
             id="colorText"
             name="colorText"
             type="color"
@@ -199,11 +201,13 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={color}
           />
         </div>
-        <div className=" mb-4">
-          <div className="mb-1 block">
-            <Label htmlFor="colorShadow" value="Цвет обводки:"></Label>
-          </div>
+        <div className="flex items-center mb-4">
+          <Label
+            className="mr-2"
+            htmlFor="colorShadow"
+            value="Цвет обводки:"></Label>
           <input
+            className={s.inputColor}
             id="colorShadow"
             name="colorShadow"
             type="color"
@@ -214,7 +218,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
         <div className="flex">
           <Button onClick={() => handleGenerate()}>Скачать</Button>
           <Button
-            className="ml-2"
+            className="ml-4"
             color="light"
             onClick={() => handleGenerate('tg')}>
             Поделиться
