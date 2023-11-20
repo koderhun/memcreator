@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="ru">
+    <>
       <Head>
         <meta
           name="viewport"
@@ -33,10 +33,12 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" type="image/png" href="./favicon.png" />
       </Head>
-      <body suppressHydrationWarning={true}>
-        <Header />
-        <main className="container mx-auto p-4">{children}</main>
-      </body>
-    </html>
+      <html lang="ru">
+        <body suppressHydrationWarning={true}>
+          <Header />
+          <main className="container mx-auto p-4">{children}</main>
+        </body>
+      </html>
+    </>
   )
 }
