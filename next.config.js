@@ -10,6 +10,7 @@ const withPWA = require('next-pwa')({
 let envImageUnoptimize = process.env.NODE_ENV !== 'production' ? false : true
 const nextConfig = withPWA({
   output: process.env.NODE_ENV !== 'production' ? undefined : 'export',
+  basePath: '/memcreator', // путь после домена. нужно для gh-pages
   images: {
     unoptimized: envImageUnoptimize,
     remotePatterns: [
