@@ -90,7 +90,7 @@ export const MemContent: React.FC<MemContentProps> = ({
             <Label htmlFor="file" value="Загрузить файл:" />
           </div>
 
-          <FileInput onChange={handleFileLoad} id="file" key={file ?? ''} />
+          <FileInput onChange={handleFileLoad} id="file" />
           <p
             className="mt-1 text-sm text-gray-500 dark:text-gray-300"
             id="file_input_help">
