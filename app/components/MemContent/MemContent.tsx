@@ -97,14 +97,6 @@ export const MemContent: React.FC<MemContentProps> = ({
             PNG, JPG (MAX. 800x400px)
           </p>
         </div>
-        <div>
-          <div className="mb-2">
-            <Label value="&nbsp;" />
-          </div>
-          <Button color="red" onClick={handleDelete} className={s.delete}>
-            Удалить
-          </Button>
-        </div>
       </div>
     </div>
   )
