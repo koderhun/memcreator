@@ -12,7 +12,7 @@
       right: 0;
       top: 0;
       bottom: 0;
-      background-color: #ffffffad;
+      background-color: var(--form-disabled);
     }
   }
 }
@@ -21,4 +21,8 @@
   form {
     display: none;
   }
+}
+
+.labelInputColor {
+  min-width: 110px;
 }

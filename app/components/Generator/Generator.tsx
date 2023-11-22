@@ -174,7 +174,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
           />
         </div>
 
-        <div className=" mb-4">
+        <div className="mb-6">
           <div className="mb-1 block">
             <Label htmlFor="fontsize" value="Размер шрифта:" /> {fontSize}
           </div>
@@ -189,7 +189,7 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
         </div>
         <div className="flex items-center mb-4">
           <Label
-            className="mr-2"
+            className={s.labelInputColor}
             htmlFor="colorText"
             value="Цвет текста:"></Label>
           <input
@@ -201,9 +201,9 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
             value={color}
           />
         </div>
-        <div className="flex items-center mb-4">
+        <div className="flex items-center pb-8">
           <Label
-            className="mr-2"
+            className={s.labelInputColor}
             htmlFor="colorShadow"
             value="Цвет обводки:"></Label>
           <input
