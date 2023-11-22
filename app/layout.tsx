@@ -1,5 +1,4 @@
 import type {Metadata} from 'next'
-import Head from 'next/head'
 import './globals.scss'
 import {Header} from '@/components'
 
@@ -32,7 +31,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           <meta name="application-name" content="MemCreator" />
           <meta name="msapplication-TileColor" content="#00aba9" />
           <meta name="theme-color" content="#ffffff" />
-          <link rel="icon" type="image/png" href="./favicon.png" />
+          <link rel="icon" type="image/png" href="./favicon.webp" />
         </head>
 
         <body suppressHydrationWarning={true}>
