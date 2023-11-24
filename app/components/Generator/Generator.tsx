@@ -140,91 +140,93 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
           handleDragStop={handleDragStop}
         />
       </div>
-      <div className={s.form}>
-        <h1 className="mb-2 text-4xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-          Создайте свой мем
-        </h1>
-        <div className="mb-4">
-          <Button color="light" onClick={handleAppendText}>
-            Добавить строку
-          </Button>
-        </div>
-        <div className=" mb-4">
-          <div className="mb-1 block">
-            <Label htmlFor={name} value="Текст: " />
+      {loadedImage ? (
+        <div className={s.form}>
+          <h1 className="mb-2 text-4xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+            Создайте свой мем
+          </h1>
+          <div className="mb-4">
+            <Button color="light" onClick={handleAppendText}>
+              Добавить строку
+            </Button>
           </div>
-          <Textarea
-            onChange={handleText}
-            id={name}
-            value={name}
-            name={name}
-            rows={2}
-          />
-        </div>
-        <div className=" mb-4">
-          <div className="mb-1 block">
-            <Label htmlFor="rotate" value="Поворот текста:" /> {rotate}
+          <div className=" mb-4">
+            <div className="mb-1 block">
+              <Label htmlFor={name} value="Текст: " />
+            </div>
+            <Textarea
+              onChange={handleText}
+              id={name}
+              value={name}
+              name={name}
+              rows={2}
+            />
           </div>
-          <RangeSlider
-            id="rotate"
-            min="-180"
-            max="180"
-            onChange={handleRotate}
-            value={rotate}
-          />
-        </div>
+          <div className=" mb-4">
+            <div className="mb-1 block">
+              <Label htmlFor="rotate" value="Поворот текста:" /> {rotate}
+            </div>
+            <RangeSlider
+              id="rotate"
+              min="-180"
+              max="180"
+              onChange={handleRotate}
+              value={rotate}
+            />
+          </div>
 
-        <div className="mb-6">
-          <div className="mb-1 block">
-            <Label htmlFor="fontsize" value="Размер шрифта:" /> {fontSize}
+          <div className="mb-6">
+            <div className="mb-1 block">
+              <Label htmlFor="fontsize" value="Размер шрифта:" /> {fontSize}
+            </div>
+            <RangeSlider
+              id="fontsize"
+              name="fontsize"
+              min="10"
+              max="60"
+              onChange={handleFontSize}
+              value={fontSize}
+            />
           </div>
-          <RangeSlider
-            id="fontsize"
-            name="fontsize"
-            min="10"
-            max="60"
-            onChange={handleFontSize}
-            value={fontSize}
-          />
+          <div className="flex items-center mb-4">
+            <Label
+              className={s.labelInputColor}
+              htmlFor="colorText"
+              value="Цвет текста:"></Label>
+            <input
+              className={s.inputColor}
+              id="colorText"
+              name="colorText"
+              type="color"
+              onChange={handleColor}
+              value={color}
+            />
+          </div>
+          <div className="flex items-center pb-8">
+            <Label
+              className={s.labelInputColor}
+              htmlFor="colorShadow"
+              value="Цвет обводки:"></Label>
+            <input
+              className={s.inputColor}
+              id="colorShadow"
+              name="colorShadow"
+              type="color"
+              onChange={handleStrokeColor}
+              value={strokeColor}
+            />
+          </div>
+          <div className="flex">
+            <Button onClick={() => handleGenerate()}>Скачать</Button>
+            <Button
+              className="ml-4"
+              color="light"
+              onClick={() => handleGenerate('tg')}>
+              Поделиться
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center mb-4">
-          <Label
-            className={s.labelInputColor}
-            htmlFor="colorText"
-            value="Цвет текста:"></Label>
-          <input
-            className={s.inputColor}
-            id="colorText"
-            name="colorText"
-            type="color"
-            onChange={handleColor}
-            value={color}
-          />
-        </div>
-        <div className="flex items-center pb-8">
-          <Label
-            className={s.labelInputColor}
-            htmlFor="colorShadow"
-            value="Цвет обводки:"></Label>
-          <input
-            className={s.inputColor}
-            id="colorShadow"
-            name="colorShadow"
-            type="color"
-            onChange={handleStrokeColor}
-            value={strokeColor}
-          />
-        </div>
-        <div className="flex">
-          <Button onClick={() => handleGenerate()}>Скачать</Button>
-          <Button
-            className="ml-4"
-            color="light"
-            onClick={() => handleGenerate('tg')}>
-            Поделиться
-          </Button>
-        </div>
-      </div>
+      ) : null}
     </div>
   )
 }
