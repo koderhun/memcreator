@@ -119,7 +119,10 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
     setTextList(thisTextList)
   }
 
-  const handleSelectText = (key: number) => setSelectKey(key)
+  const handleSelectText = (key: number) => {
+    console.log('kkk', key)
+    setSelectKey(key)
+  }
 
   let {rotate, fontSize, name, color, strokeColor} = textList[selectKey]
 
@@ -218,12 +221,6 @@ export const Generator: React.FC<GeneratorProps> = ({sigItem}) => {
           </div>
           <div className="flex">
             <Button onClick={() => handleGenerate()}>Скачать</Button>
-            <Button
-              className="ml-4"
-              color="light"
-              onClick={() => handleGenerate('tg')}>
-              Поделиться
-            </Button>
           </div>
         </div>
       ) : null}

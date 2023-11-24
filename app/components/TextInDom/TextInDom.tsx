@@ -61,6 +61,7 @@ export const TextInDom: React.FC<TextInDomProps> = ({
       <div
         id={`text${index}`}
         onClick={() => handleSelectText(index)}
+        onTouchStart={() => handleSelectText(index)}
         className={cn(s.TextInDom, s['TextInDom' + index], activeClass)}>
         <div style={style}>
           <div>{settings.name}</div>
