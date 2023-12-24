@@ -14,6 +14,9 @@ dependencies:
   dom-to-image:
     specifier: ^2.6.0
     version: 2.6.0
+  dom-to-image-more:
+    specifier: ^3.2.0
+    version: 3.2.0
   flowbite:
     specifier: ^2.1.1
     version: 2.1.1
@@ -2425,6 +2428,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dom-to-image-more@3.2.0:
+    resolution: {integrity: sha512-2bGQTB6m17MBseVhIjShwZqqqCyVS9GgTykWqvVXMqr56fSgHhXnEvZfZkaSuHJYW3ICZQ3sZwAu+UY5tfsF9Q==}
+    dev: false
 
   /dom-to-image@2.6.0:
     resolution: {integrity: sha512-Dt0QdaHmLpjURjU7Tnu3AgYSF2LuOmksSGsUcE6ItvJoCWTBEmiMXcqBdNSAm9+QbbwD7JMoVsuuKX6ZVQv1qA==}

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import {toJpeg} from 'dom-to-image'
+import domtoimage from 'dom-to-image-more'
 
 const getName = (): string => {
   const d = new Date()
@@ -12,12 +12,11 @@ export const elementToImage = (
   node: HTMLElement | null,
   typeHref: string = '',
 ): void => {
-  toJpeg(node, {
-    quality: 0.95,
-    width: node.offsetWidth,
-    height: node.offsetHeight,
-    bgcolor: '#FF',
-  })
+  domtoimage
+    .toJpeg(node, {
+      quality: 0.95,
+      bgcolor: '#FF',
+    })
     .then((dataUrl) => {
       const link = document.createElement('a')
       link.setAttribute('target', '_blank')
